@@ -61,6 +61,7 @@ h1 {
     font-size: 35px;
     background: linear-gradient(#fff,#ff00cc);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
 }
 
@@ -108,6 +109,11 @@ h1 {
     border-radius: 15px;
     border: 1px solid #ff00cc;
     text-align: center;
+}
+
+.skill a {
+    color: white;
+    text-decoration: none;
 }
 
 .title {
@@ -188,6 +194,10 @@ h1 {
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
 
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
     -webkit-mask-composite:xor;
             mask-composite:exclude;
 }
@@ -209,6 +219,14 @@ footer{
 </head>
 
 <body>
+
+<noscript>
+  <style>
+    #startScreen{display:none}
+    #mainContent{display:block}
+    .box{opacity:1;transform:none}
+  </style>
+</noscript>
 
 <audio id="bgMusic" loop>
     <source src="aboutmysong.mp3" type="audio/mpeg">
@@ -236,15 +254,15 @@ footer{
 
 <p>Developer & YouTuber</p>
 
-<a href="https://www.facebook.com/ainulbhaix" target="_blank" class="btn">
+<a href="https://www.facebook.com/ainulbhaix" target="_blank" rel="noopener noreferrer" class="btn">
 <i class="fab fa-facebook"></i> Facebook
 </a>
 
-<a href="https://www.youtube.com/@ainulbhaix" target="_blank" class="btn">
+<a href="https://www.youtube.com/@ainulbhaix" target="_blank" rel="noopener noreferrer" class="btn">
 <i class="fab fa-youtube"></i> YouTube
 </a>
 
-<a href="https://t.me/addlist/2jYQ8IGF5NI2Zjk1" target="_blank" class="btn">
+<a href="https://t.me/addlist/2jYQ8IGF5NI2Zjk1" target="_blank" rel="noopener noreferrer" class="btn">
 <i class="fab fa-telegram"></i> Telegram
 </a>
 
@@ -270,7 +288,7 @@ Ainul Bhai is a technical content creator focusing on mod apps and development.
 
 <div class="skills">
 
-<div class="skill">UI/UV (100%)</div>
+<div class="skill">UI/UX (100%)</div>
 <div class="skill">HTML (98%)</div>
 <div class="skill">CSS (98%)</div>
 <div class="skill">XML (90%)</div>
@@ -303,14 +321,14 @@ My Name Is Ainul Islam Sohag, And I Am 19 Years Old. I Am A Student With A Stron
 
 <div class="skill">
 <i class="fas fa-id-badge"></i><br>
-<a href="https://t.me/idfindrobot" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/idfindrobot" target="_blank" rel="noopener noreferrer">
 User Info
 </a>
 </div>
 
 <div class="skill">
 <i class="fas fa-search"></i><br>
-<a href="https://t.me/myidfindbot" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/myidfindbot" target="_blank" rel="noopener noreferrer">
 Id Find Bot
 </a>
 </div>
@@ -329,42 +347,42 @@ Id Find Bot
 
 <div class="skill">
 <i class="fas fa-thumbs-up"></i><br>
-<a href="https://t.me/atoreactionakbot" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/atoreactionakbot" target="_blank" rel="noopener noreferrer">
 Ato Reaction Bot
 </a>
 </div>
 
 <div class="skill">
 <i class="fas fa-heart"></i><br>
-<a href="https://t.me/atoreactionrobot" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/atoreactionrobot" target="_blank" rel="noopener noreferrer">
 Ato Reaction Robot
 </a>
 </div>
 
 <div class="skill">
 <i class="fas fa-smile"></i><br>
-<a href="https://t.me/atoreactsbot" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/atoreactsbot" target="_blank" rel="noopener noreferrer">
 Ato Reacts Bot
 </a>
 </div>
 
 <div class="skill">
 <i class="fas fa-heartbeat"></i><br>
-<a href="https://t.me/ReactForgeBot" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/ReactForgeBot" target="_blank" rel="noopener noreferrer">
 React Forge Bot
 </a>
 </div>
 
 <div class="skill">
 <i class="fas fa-star"></i><br>
-<a href="https://t.me/atoreactbot" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/atoreactbot" target="_blank" rel="noopener noreferrer">
 Ato React Bot
 </a>
 </div>
 
 <div class="skill">
 <i class="fas fa-fire"></i><br>
-<a href="https://t.me/AtoReactRobot" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/AtoReactRobot" target="_blank" rel="noopener noreferrer">
 Ato React Robot
 </a>
 </div>
@@ -382,37 +400,37 @@ Ato React Robot
 <div class="skills">
 
 <div class="skill">
-<a href="https://t.me/ABorganization" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/ABorganization" target="_blank" rel="noopener noreferrer">
 AB Organization
 </a>
 </div>
 
 <div class="skill">
-<a href="https://t.me/MemberNotify" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/MemberNotify" target="_blank" rel="noopener noreferrer">
 Member Notify
 </a>
 </div>
 
 <div class="skill">
-<a href="https://t.me/ABorgMods" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/ABorgMods" target="_blank" rel="noopener noreferrer">
 Ab Org Mods
 </a>
 </div>
 
 <div class="skill">
-<a href="https://t.me/ABcapCutPro" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/ABcapCutPro" target="_blank" rel="noopener noreferrer">
 CapCut Pro
 </a>
 </div>
 
 <div class="skill">
-<a href="https://t.me/ModsPrivate" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/ModsPrivate" target="_blank" rel="noopener noreferrer">
 Mods Private
 </a>
 </div>
 
 <div class="skill">
-<a href="https://t.me/ErrorFixHub" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/ErrorFixHub" target="_blank" rel="noopener noreferrer">
 Error FixHub
 </a>
 </div>
@@ -430,13 +448,13 @@ Error FixHub
 <div class="skills">
 
 <div class="skill">
-<a href="https://t.me/ABorgModsDiscuss" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/ABorgModsDiscuss" target="_blank" rel="noopener noreferrer">
 ABorg Mods
 </a>
 </div>
 
 <div class="skill">
-<a href="https://t.me/aborgcommunity" target="_blank" style="color:white;text-decoration:none;">
+<a href="https://t.me/aborgcommunity" target="_blank" rel="noopener noreferrer">
 AB Community
 </a>
 </div>
@@ -478,7 +496,7 @@ document.getElementById("startScreen").style.display = "none";
 
 document.getElementById("mainContent").style.display = "block";
 
-document.getElementById("bgMusic").play();
+document.getElementById("bgMusic").play().catch(() => {});
 
 const boxes = document.querySelectorAll('.box');
 
@@ -565,6 +583,20 @@ drops[i]++;
 }
 
 setInterval(draw,33);
+
+/* RESIZE HANDLER */
+
+window.addEventListener('resize', () => {
+
+canvas.width = window.innerWidth;
+
+canvas.height = window.innerHeight;
+
+columns = canvas.width / fontSize;
+
+drops = Array(Math.floor(columns)).fill(1);
+
+});
 
 </script>
 
