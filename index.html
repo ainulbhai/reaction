@@ -3,602 +3,875 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ainul Bhai</title>
+<meta name="theme-color" content="#010208">
+<meta name="description" content="Telegram auto reaction bots for Channels & Groups. Fast, 24/7 automated reactions by AB Organization.">
+<title>AB Organization • Reaction Bots</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⚡%3C/text%3E%3C/svg%3E">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial;
-    color: white;
-    overflow-x: hidden;
-    background: black;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    color:#fff;
+    overflow-x:hidden;
+    background:#010208;
+}
+button,a{font-family:inherit}
+
+/* ================= BACKGROUND ================= */
+#matrix{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:-10;
+    pointer-events:none;
+    background:#010208;
+}
+.sky-glow{
+    position:fixed;
+    inset:0;
+    z-index:-9;
+    pointer-events:none;
+    background:
+      radial-gradient(circle at 12% 12%,rgba(0,170,255,.16),transparent 28%),
+      radial-gradient(circle at 88% 25%,rgba(210,0,255,.14),transparent 30%),
+      radial-gradient(circle at 50% 100%,rgba(0,255,210,.09),transparent 34%);
+    animation:skyPulse 7s ease-in-out infinite alternate;
+}
+@keyframes skyPulse{from{opacity:.55}to{opacity:1}}
+
+#lightningFlash{
+    position:fixed;
+    inset:0;
+    z-index:-8;
+    pointer-events:none;
+    background:rgba(235,250,255,0);
+}
+#lightningFlash.flash{animation:lightningFlash .38s ease-out}
+@keyframes lightningFlash{
+    0%{background:rgba(235,250,255,.72)}
+    14%{background:rgba(255,255,255,.10)}
+    27%{background:rgba(235,250,255,.48)}
+    100%{background:rgba(235,250,255,0)}
 }
 
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-}
-
-.box {
-    margin: 20px;
-    padding: 20px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,0,255,0.4);
-    box-shadow: 0 0 20px rgba(255,0,255,0.4);
-    opacity: 0;
-    transform: translateY(40px);
-}
-
-.box.reveal{
-    animation: fadeUp 0.9s forwards;
-}
-
-@keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.header {
-    text-align: center;
-}
-
-.logo {
-    width: 120px;
-    border-radius: 50%;
-    border: 3px solid #ff00cc;
-    box-shadow: 0 0 25px #ff00cc;
-}
-
-h1 {
-    font-size: 35px;
-    background: linear-gradient(#fff,#ff00cc);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.btn {
-    position: relative;
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 15px;
-    border-radius: 20px;
-    border: 1px solid #ff00cc;
-    color: white;
-    text-decoration: none;
-    overflow: hidden;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: rgba(255,0,204,0.2);
-}
-
-.ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.35);
-    transform: scale(0);
-    animation: rippleEffect 0.6s linear;
-    pointer-events: none;
-}
-
-@keyframes rippleEffect {
-    to {
-        transform: scale(6);
-        opacity: 0;
-    }
-}
-
-.skills {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.skill {
-    padding: 15px;
-    border-radius: 15px;
-    border: 1px solid #ff00cc;
-    text-align: center;
-}
-
-.skill a {
-    color: white;
-    text-decoration: none;
-}
-
-.title {
-    color: #ff00cc;
-    margin-bottom: 10px;
-}
-
-/* START SCREEN */
-
+/* ================= START SCREEN ================= */
 #startScreen{
-    height:100vh;
+    min-height:100vh;
+    min-height:100dvh;
     display:flex;
     justify-content:center;
     align-items:center;
+    padding:20px;
 }
-
+.start-wrap{text-align:center}
+.start-logo{
+    font-size:clamp(28px,7vw,48px);
+    font-weight:900;
+    letter-spacing:6px;
+    margin-bottom:10px;
+    text-shadow:0 0 12px #00ffff,0 0 35px #ff00cc;
+    animation:stormLogo 2s ease-in-out infinite alternate;
+}
+.start-sub{
+    color:#b9c7d9;
+    margin:0 0 25px;
+    letter-spacing:3px;
+    font-size:12px;
+}
+@keyframes stormLogo{
+    to{text-shadow:0 0 20px #ff00cc,0 0 55px #00ffff}
+}
 .start-btn{
-    padding:15px 35px;
-    border:none;
-    border-radius:30px;
-    background:#ff00cc;
-    color:white;
-    font-size:20px;
+    position:relative;
+    padding:16px 30px;
+    border:1px solid #ff00cc;
+    border-radius:35px;
+    background:linear-gradient(90deg,rgba(255,0,204,.18),rgba(0,255,238,.12));
+    color:#fff;
+    font-size:18px;
+    font-weight:bold;
     cursor:pointer;
-    box-shadow:0 0 25px #ff00cc;
+    box-shadow:0 0 22px rgba(255,0,204,.55),inset 0 0 20px rgba(0,255,255,.06);
+    overflow:hidden;
+    transition:.3s;
 }
+.start-btn:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 0 38px rgba(255,0,204,.75)}
+.start-btn i{margin-right:8px}
 
-#mainContent{
+/* ================= MUSIC BUTTON ================= */
+#musicBtn{
+    position:fixed;
+    top:15px;
+    right:15px;
+    z-index:99;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    border:1px solid #ff00cc;
+    background:rgba(255,0,204,.15);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    color:#fff;
+    font-size:15px;
+    cursor:pointer;
+    box-shadow:0 0 15px rgba(255,0,204,.5);
+    transition:.3s;
     display:none;
 }
+#musicBtn:hover{background:rgba(255,0,204,.32);transform:scale(1.08)}
 
-/* TICKER */
-
-.ticker{
+/* ================= CARDS ================= */
+.box{
+    position:relative;
+    margin:18px auto;
+    padding:22px;
+    width:min(920px,calc(100% - 24px));
+    border-radius:22px;
+    background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+    backdrop-filter:blur(13px);
+    -webkit-backdrop-filter:blur(13px);
+    border:1px solid rgba(255,0,204,.38);
+    box-shadow:0 0 24px rgba(255,0,204,.22),inset 0 0 30px rgba(0,255,255,.025);
+    opacity:0;
+    transform:translateY(35px) scale(.98);
     overflow:hidden;
-    margin-top:10px;
+}
+.box::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-80%;
+    width:55%;
+    height:2px;
+    background:linear-gradient(90deg,transparent,#00ffff,#fff,transparent);
+    box-shadow:0 0 18px #00ffff;
+    animation:cardScan 5s linear infinite;
+}
+@keyframes cardScan{
+    0%{left:-70%}
+    55%,100%{left:120%}
+}
+.box.reveal{animation:fadeUp .8s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0) scale(1)}}
+
+.header{text-align:center}
+.logo{
+    width:118px;height:118px;
+    object-fit:cover;
+    border-radius:50%;
+    border:3px solid #ff00cc;
+    box-shadow:0 0 20px #ff00cc,0 0 50px rgba(0,255,255,.25);
+    animation:logoPulse 3s ease-in-out infinite;
+}
+.logo-fallback{
+    display:grid;
+    place-items:center;
+    margin:0 auto;
+    font-size:36px;
+    font-weight:900;
+    color:#ff00cc;
+    background:rgba(255,0,204,.08);
+    text-shadow:0 0 15px #ff00cc;
+}
+@keyframes logoPulse{
+    50%{box-shadow:0 0 30px #ff00cc,0 0 65px rgba(0,255,255,.4)}
+}
+h1{
+    margin:16px 0 8px;
+    font-size:clamp(29px,6vw,43px);
+    background:linear-gradient(90deg,#fff,#ff00cc,#00ffee,#fff);
+    background-size:300% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:titleShine 4s linear infinite;
+}
+@keyframes titleShine{to{background-position:300% center}}
+.subtitle{
+    margin:0 0 15px;
+    color:#b7c6d9;
+    font-size:13px;
+    letter-spacing:2px;
 }
 
+/* ================= BUTTONS ================= */
+.btn{
+    position:relative;
+    display:inline-block;
+    margin:7px;
+    padding:10px 15px;
+    border-radius:22px;
+    border:1px solid rgba(255,0,204,.8);
+    color:white;
+    text-decoration:none;
+    overflow:hidden;
+    background:rgba(255,255,255,.035);
+    transition:.3s;
+}
+.btn:hover{
+    transform:translateY(-2px);
+    background:rgba(255,0,204,.16);
+    box-shadow:0 0 20px rgba(255,0,204,.5);
+}
+.btn i{margin-right:5px}
+.ripple{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,.35);
+    transform:scale(0);
+    animation:rippleEffect .6s linear;
+    pointer-events:none;
+}
+@keyframes rippleEffect{to{transform:scale(6);opacity:0}}
+
+/* ================= TITLES ================= */
+.title{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    color:#ff42d8;
+    margin:0 0 16px;
+    font-size:21px;
+    text-shadow:0 0 12px rgba(255,0,204,.45);
+}
+.title::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg,rgba(255,0,204,.7),transparent);
+}
+
+/* ================= BOT GRID (whole card clickable) ================= */
+.skills{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+.skill{
+    position:relative;
+    padding:22px 12px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    border-radius:17px;
+    border:1px solid rgba(255,0,204,.48);
+    background:rgba(0,0,0,.16);
+    text-align:center;
+    overflow:hidden;
+    color:#fff;
+    text-decoration:none;
+    transition:.35s;
+    -webkit-tap-highlight-color:rgba(255,0,204,.25);
+    tap-highlight-color:rgba(255,0,204,.25);
+}
+.skill::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:18px;
+    padding:1px;
+    background:linear-gradient(120deg,#ff00cc,#7a5cff,#00ffff,#ff00cc);
+    background-size:300% 300%;
+    animation:gradientBorder 5s linear infinite;
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    pointer-events:none;
+}
+@keyframes gradientBorder{to{background-position:300% 50%}}
+.skill:hover{
+    transform:translateY(-5px) scale(1.015);
+    box-shadow:0 0 25px rgba(255,0,204,.25),0 0 45px rgba(0,255,255,.08);
+    background:rgba(255,0,204,.10);
+}
+.skill:active{
+    transform:scale(.97);
+    box-shadow:0 0 30px rgba(255,0,204,.45);
+}
+.skill .bot-icon{
+    font-size:29px;
+    margin-bottom:10px;
+    color:#fff;
+    text-shadow:0 0 14px #ff00cc;
+    animation:iconFloat 2.5s ease-in-out infinite;
+}
+@keyframes iconFloat{50%{transform:translateY(-3px) scale(1.05)}}
+.bot-name{
+    color:#fff;
+    font-weight:bold;
+    font-size:15px;
+}
+
+/* ================= FEATURE LIST ================= */
+.feature{
+    padding:9px 0;
+    color:#e9edf5;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    line-height:1.5;
+}
+.feature:last-child{border-bottom:0}
+.feature i{
+    width:25px;
+    color:#00f5ff;
+    text-shadow:0 0 10px #00f5ff;
+}
+
+/* ================= STEPS ================= */
+.step{
+    display:flex;
+    gap:12px;
+    margin:13px 0;
+    align-items:flex-start;
+}
+.step-num{
+    flex:0 0 34px;
+    height:34px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    border:1px solid #ff00cc;
+    box-shadow:0 0 12px rgba(255,0,204,.35);
+    font-weight:bold;
+}
+.step-text{line-height:1.55;color:#e9edf5}
+
+/* ================= STATS ================= */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+.stat{
+    padding:14px 8px;
+    border-radius:15px;
+    background:rgba(0,0,0,.15);
+    border:1px solid rgba(0,255,255,.22);
+    text-align:center;
+}
+.stat i{
+    display:block;
+    color:#00ffff;
+    margin-bottom:7px;
+    text-shadow:0 0 12px #00ffff;
+}
+.stat b{display:block;font-size:18px}
+.stat span{font-size:10px;color:#9ba9bc;letter-spacing:.7px}
+
+/* ================= TICKER (seamless) ================= */
+.ticker{overflow:hidden;margin-top:10px}
 .ticker-box{
     position:relative;
-    padding:18px 25px;
+    padding:17px 22px;
     border-radius:15px;
     overflow:hidden;
     color:white;
     font-weight:bold;
-    border:2px solid #ff00cc;
-    background:rgba(255,255,255,0.05);
-    box-shadow:0 0 20px rgba(255,0,255,0.5);
+    border:1px solid #ff00cc;
+    background:rgba(255,255,255,.045);
+    box-shadow:0 0 20px rgba(255,0,255,.35);
     white-space:nowrap;
 }
-
-.ticker-box span{
+.ticker-track{
+    display:inline-flex;
+    white-space:nowrap;
+    animation:scrollText 18s linear infinite;
+}
+.ticker-track span{
     display:inline-block;
-    padding-left:100%;
-    animation:scrollText 12s linear infinite;
+    padding-right:60px;
 }
-
-@keyframes scrollText{
-    0%{
-        transform:translateX(0%);
-    }
-    100%{
-        transform:translateX(-100%);
-    }
-}
-
+@keyframes scrollText{to{transform:translateX(-50%)}}
 .ticker-box::before{
     content:"";
     position:absolute;
     inset:-3px;
     border-radius:15px;
     padding:3px;
-    background:linear-gradient(90deg,#ff00cc,#00ffee,#ff00cc);
+    background:linear-gradient(90deg,#ff00cc,#00ffee,#7a5cff,#ff00cc);
     background-size:300% 300%;
     animation:borderRun 3s linear infinite;
-
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
-    mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
     -webkit-mask-composite:xor;
-            mask-composite:exclude;
+    mask-composite:exclude;
+    pointer-events:none;
 }
+@keyframes borderRun{to{background-position:300% 50%}}
 
-@keyframes borderRun{
-    0%{background-position:0% 50%;}
-    100%{background-position:300% 50%;}
-}
-
-/* FOOTER */
-
+/* ================= FOOTER ================= */
 footer{
     text-align:center;
-    padding:25px;
-    color:#aaa;
-    font-size:15px;
+    padding:28px 15px;
+    color:#8895a7;
+    font-size:14px;
+}
+.footer-line{
+    width:min(420px,70%);
+    height:1px;
+    margin:0 auto 15px;
+    background:linear-gradient(90deg,transparent,#ff00cc,#00ffff,transparent);
+    box-shadow:0 0 12px rgba(0,255,255,.3);
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:620px){
+    .box{margin:12px auto;padding:17px;width:calc(100% - 20px)}
+    .skills{grid-template-columns:1fr 1fr;gap:9px}
+    .skill{padding:18px 8px}
+    .bot-name{font-size:13px}
+    .skill .bot-icon{font-size:25px}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .start-logo{letter-spacing:3px}
+    #musicBtn{width:40px;height:40px;font-size:13px}
+}
+@media(max-width:380px){
+    .skills{grid-template-columns:1fr}
+    .start-btn{font-size:15px;padding:13px 20px}
+}
+
+/* Reduced motion (CSS) */
+@media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+        animation-duration:.001ms!important;
+        animation-iteration-count:1!important;
+        scroll-behavior:auto!important;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<noscript>
-  <style>
-    #startScreen{display:none}
-    #mainContent{display:block}
-    .box{opacity:1;transform:none}
-  </style>
-</noscript>
+<audio id="bgMusic" loop preload="none">
+    <source src="reactionbotsong.mp3" type="audio/mpeg">
+</audio>
 
-<audio id="bgMusic" loop>
-    <source src="aboutmysong.mp3" type="audio/mpeg">
+<audio id="thunderSound" preload="none">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
 </audio>
 
 <canvas id="matrix"></canvas>
+<div class="sky-glow"></div>
+<div id="lightningFlash"></div>
 
-<!-- START BUTTON -->
+<!-- MUSIC TOGGLE -->
+<button id="musicBtn" onclick="toggleMusic()" aria-label="Toggle Music">
+    <i class="fas fa-volume-high"></i>
+</button>
 
+<!-- START -->
 <div id="startScreen">
-  <button class="start-btn" onclick="showInfo()">
-    Explore Portfolio
-  </button>
+    <div class="start-wrap">
+        <button class="start-btn" onclick="showInfo()">
+            <i class="fas fa-rocket"></i> SEE REACTION BOTS
+        </button>
+    </div>
 </div>
 
-<!-- MAIN CONTENT -->
-
-<div id="mainContent">
-
-<div class="box header">
-
-<img src="aboutmylogo.png" class="logo" alt="Ainul Bhai">
-
-<h1>ꫝɪɴυʟ Ᏼʜᴀɪ</h1>
-
-<p>Developer & YouTuber</p>
-
-<a href="https://www.facebook.com/ainulbhaix" target="_blank" rel="noopener noreferrer" class="btn">
-<i class="fab fa-facebook"></i> Facebook
-</a>
-
-<a href="https://www.youtube.com/@ainulbhaix" target="_blank" rel="noopener noreferrer" class="btn">
-<i class="fab fa-youtube"></i> YouTube
-</a>
-
-<a href="https://t.me/addlist/2jYQ8IGF5NI2Zjk1" target="_blank" rel="noopener noreferrer" class="btn">
-<i class="fab fa-telegram"></i> Telegram
-</a>
-
-</div>
-
-<div class="box">
-
-<h2 class="title">
-<i class="fab fa-youtube"></i> YOUTUBE IDENTITY
-</h2>
-
-<p>
-Ainul Bhai is a technical content creator focusing on mod apps and development.
-</p>
-
-</div>
-
-<div class="box">
-
-<h2 class="title">
-<i class="fas fa-code"></i> SKILLS
-</h2>
-
-<div class="skills">
-
-<div class="skill">UI/UX (100%)</div>
-<div class="skill">HTML (98%)</div>
-<div class="skill">CSS (98%)</div>
-<div class="skill">XML (90%)</div>
-<div class="skill">Python (70%)</div>
-<div class="skill">Java (70%)</div>
-
-</div>
-
-</div>
-
-<div class="box">
-
-<h2 class="title">
-<i class="fas fa-user"></i> ABOUT ME
-</h2>
-
-<p>
-My Name Is Ainul Islam Sohag, And I Am 19 Years Old. I Am A Student With A Strong Interest In Business And App Development. Engineering And Technology Inspire Me To Learn New Things And Improve My Skills Every Day. I Live With My Mother, Who Is My Biggest Support And Motivation In Life. My Dream Is To Create My Own Successful App In The Future And Build Something That Can Help People And Make A Positive Impact.
-</p>
-
-</div>
-
-<div class="box">
-
-<h2 class="title">
-<i class="fas fa-robot"></i> ID FIND BOTS
-</h2>
-
-<div class="skills">
-
-<div class="skill">
-<i class="fas fa-id-badge"></i><br>
-<a href="https://t.me/idfindrobot" target="_blank" rel="noopener noreferrer">
-User Info
-</a>
-</div>
-
-<div class="skill">
-<i class="fas fa-search"></i><br>
-<a href="https://t.me/myidfindbot" target="_blank" rel="noopener noreferrer">
-Id Find Bot
-</a>
-</div>
-
-</div>
-
-</div>
-
-<div class="box">
-
-<h2 class="title">
-<i class="fas fa-hand-holding-heart"></i> REACTION BOTS
-</h2>
-
-<div class="skills">
-
-<div class="skill">
-<i class="fas fa-thumbs-up"></i><br>
-<a href="https://t.me/atoreactionakbot" target="_blank" rel="noopener noreferrer">
-Ato Reaction Bot
-</a>
-</div>
-
-<div class="skill">
-<i class="fas fa-heart"></i><br>
-<a href="https://t.me/atoreactionrobot" target="_blank" rel="noopener noreferrer">
-Ato Reaction Robot
-</a>
-</div>
-
-<div class="skill">
-<i class="fas fa-smile"></i><br>
-<a href="https://t.me/atoreactsbot" target="_blank" rel="noopener noreferrer">
-Ato Reacts Bot
-</a>
-</div>
-
-<div class="skill">
-<i class="fas fa-heartbeat"></i><br>
-<a href="https://t.me/ReactForgeBot" target="_blank" rel="noopener noreferrer">
-React Forge Bot
-</a>
-</div>
-
-<div class="skill">
-<i class="fas fa-star"></i><br>
-<a href="https://t.me/atoreactbot" target="_blank" rel="noopener noreferrer">
-Ato React Bot
-</a>
-</div>
-
-<div class="skill">
-<i class="fas fa-fire"></i><br>
-<a href="https://t.me/AtoReactRobot" target="_blank" rel="noopener noreferrer">
-Ato React Robot
-</a>
-</div>
-
-</div>
-
-</div>
-
-<div class="box">
-
-<h2 class="title">
-<i class="fas fa-bullhorn"></i> CHANNELS
-</h2>
-
-<div class="skills">
-
-<div class="skill">
-<a href="https://t.me/ABorganization" target="_blank" rel="noopener noreferrer">
-AB Organization
-</a>
-</div>
-
-<div class="skill">
-<a href="https://t.me/MemberNotify" target="_blank" rel="noopener noreferrer">
-Member Notify
-</a>
-</div>
-
-<div class="skill">
-<a href="https://t.me/ABorgMods" target="_blank" rel="noopener noreferrer">
-Ab Org Mods
-</a>
-</div>
-
-<div class="skill">
-<a href="https://t.me/ABcapCutPro" target="_blank" rel="noopener noreferrer">
-CapCut Pro
-</a>
-</div>
-
-<div class="skill">
-<a href="https://t.me/ModsPrivate" target="_blank" rel="noopener noreferrer">
-Mods Private
-</a>
-</div>
-
-<div class="skill">
-<a href="https://t.me/ErrorFixHub" target="_blank" rel="noopener noreferrer">
-Error FixHub
-</a>
-</div>
-
-</div>
-
-</div>
-
-<div class="box">
-
-<h2 class="title">
-<i class="fas fa-users"></i> GROUPS
-</h2>
-
-<div class="skills">
-
-<div class="skill">
-<a href="https://t.me/ABorgModsDiscuss" target="_blank" rel="noopener noreferrer">
-ABorg Mods
-</a>
-</div>
-
-<div class="skill">
-<a href="https://t.me/aborgcommunity" target="_blank" rel="noopener noreferrer">
-AB Community
-</a>
-</div>
-
-</div>
-
-</div>
-
-<div class="box">
-
-<h2 class="title">
-<i class="fas fa-bolt"></i> UPCOMING PROJECTS
-</h2>
-
-<div class="ticker">
-
-<div class="ticker-box">
-<span>
-<i class="fas fa-user-secret"></i> USER INFO BOT• New Ai Bot User Id Group Id Channel Id Seen Bot Creating. 5-7 Day To Complete The Bot..!! <i class="fas fa-user-secret"></i></span>
-</div>
-
-</div>
-
-</div>
-
-<!-- FOOTER -->
-
-<footer>
-Ⓒ 𝟸𝟶𝟸𝟼 ꫝɪɴυʟㅤᏴʜᴀɪ
-</footer>
-
+<!-- MAIN -->
+<div id="mainContent" style="display:none">
+
+    <div class="box header">
+        <img src="reactionbotlogo.png" class="logo" alt="Reaction Bot Logo" onerror="logoFallback(this)">
+
+        <h1>Ꭱᴇᴀᴄᴛɪᴏɴ Ᏼᴏᴛ</h1>
+        <p class="subtitle">AUTOMATED • FAST • RELIABLE</p>
+
+        <a href="https://www.facebook.com/ainulbhaix" target="_blank" rel="noopener noreferrer" class="btn">
+            <i class="fab fa-facebook"></i> Facebook
+        </a>
+        <a href="https://www.youtube.com/@ainulbhaix" target="_blank" rel="noopener noreferrer" class="btn">
+            <i class="fab fa-youtube"></i> YouTube
+        </a>
+        <a href="https://t.me/addlist/2jYQ8IGF5NI2Zjk1" target="_blank" rel="noopener noreferrer" class="btn">
+            <i class="fab fa-telegram"></i> Telegram
+        </a>
+    </div>
+
+    <div class="box">
+        <h2 class="title"><i class="fas fa-robot"></i> REACTION BOTS</h2>
+
+        <div class="skills">
+            <a href="https://t.me/atoreactionakbot" target="_blank" rel="noopener noreferrer" class="skill">
+                <i class="fas fa-thumbs-up bot-icon"></i>
+                <span class="bot-name">Ato Reaction Bot</span>
+            </a>
+
+            <a href="https://t.me/atoreactionrobot" target="_blank" rel="noopener noreferrer" class="skill">
+                <i class="fas fa-heart bot-icon"></i>
+                <span class="bot-name">Ato Reaction Robot</span>
+            </a>
+
+            <a href="https://t.me/atoreactsbot" target="_blank" rel="noopener noreferrer" class="skill">
+                <i class="fas fa-smile bot-icon"></i>
+                <span class="bot-name">Ato Reacts Bot</span>
+            </a>
+
+            <a href="https://t.me/ReactForgeBot" target="_blank" rel="noopener noreferrer" class="skill">
+                <i class="fas fa-heartbeat bot-icon"></i>
+                <span class="bot-name">React Forge Bot</span>
+            </a>
+
+            <a href="https://t.me/atoreactbot" target="_blank" rel="noopener noreferrer" class="skill">
+                <i class="fas fa-star bot-icon"></i>
+                <span class="bot-name">Ato React Bot</span>
+            </a>
+
+            <a href="https://t.me/AtoReactRobot" target="_blank" rel="noopener noreferrer" class="skill">
+                <i class="fas fa-fire bot-icon"></i>
+                <span class="bot-name">Ato React Robot</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="box">
+        <h2 class="title"><i class="fas fa-list-check"></i> BOT FEATURES</h2>
+
+        <div class="feature"><i class="fas fa-bolt"></i> Fast reactions on new posts.</div>
+        <div class="feature"><i class="fas fa-bullseye"></i> No need to react manually.</div>
+        <div class="feature"><i class="fas fa-bullhorn"></i> Works on Channels and Groups.</div>
+        <div class="feature"><i class="fas fa-users"></i> Supports reactions using multiple bots.</div>
+        <div class="feature"><i class="fas fa-chart-bar"></i> Helps make your posts more engaging.</div>
+        <div class="feature"><i class="fas fa-screwdriver-wrench"></i> Easy bot management.</div>
+        <div class="feature"><i class="fas fa-globe"></i> 24/7 automated service.</div>
+        <div class="feature"><i class="fas fa-rocket"></i> Fast and reliable performance.</div>
+        <div class="feature"><i class="fas fa-mobile-screen-button"></i> Easy setup directly from mobile.</div>
+        <div class="feature"><i class="fas fa-bell"></i> Automatically detects new posts and reacts.</div>
+    </div>
+
+    <div class="box">
+        <h2 class="title"><i class="fas fa-signal"></i> SYSTEM OVERVIEW</h2>
+        <div class="stats">
+            <div class="stat"><i class="fas fa-robot"></i><b>21</b><span>BOTS</span></div>
+            <div class="stat"><i class="fas fa-bolt"></i><b>FAST</b><span>REACTION</span></div>
+            <div class="stat"><i class="fas fa-clock"></i><b>24/7</b><span>AUTOMATED</span></div>
+            <div class="stat"><i class="fas fa-users"></i><b>2 TYPES</b><span>CHANNEL + GROUP</span></div>
+        </div>
+    </div>
+
+    <div class="box">
+        <h2 class="title"><i class="fas fa-user"></i> HOW TO USE?</h2>
+
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">Go to the Bot and send <b>/start</b>.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">From the inline buttons, choose <b>Channel React Bot</b> for a Channel or <b>Group React Bot</b> for a Group.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">The bot will provide 21 buttons. Click the required buttons to add the necessary bots to your Channel or Group.</div>
+        </div>
+        <div class="step">
+            <div class="step-num"><i class="fas fa-check"></i></div>
+            <div class="step-text">After setup, the bots will automatically react to your new posts.</div>
+        </div>
+
+        <p style="text-align:center;color:#ff9ce9;margin:22px 0 0">
+            ✦ Make your Channel/Group engagement more attractive with Auto Reaction Bot! ✦
+        </p>
+    </div>
+
+    <div class="box">
+        <h2 class="title"><i class="fas fa-triangle-exclamation"></i> WHEN BOT NOT REACT?</h2>
+
+        <div class="ticker">
+            <div class="ticker-box">
+                <div class="ticker-track">
+                    <span><i class="fas fa-user-secret"></i> When There Is No Electricity &nbsp;•&nbsp; When The PC Shuts Down &nbsp;•&nbsp; In Case Of Internet Related Issues..!! &nbsp;&nbsp;</span>
+                    <span><i class="fas fa-user-secret"></i> When There Is No Electricity &nbsp;•&nbsp; When The PC Shuts Down &nbsp;•&nbsp; In Case Of Internet Related Issues..!! &nbsp;&nbsp;</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-line"></div>
+        𝟸𝟶𝟸𝟼 ꫝʙ ᴏʀɢᴀɴɪᴢᴀᴛɪᴏɴ
+    </footer>
 </div>
 
 <script>
+/* ================= START / MUSIC ================= */
+let userStarted=false;
+
+function unlockAudio(el){
+    /* iOS/Safari: user-gesture-এ একবার mute-play-pause করলে
+       পরে setTimeout থেকে play() করা যায় */
+    if(el._unlocked)return;
+    el.muted=true;
+    const p=el.play();
+    if(p!==undefined){
+        p.then(()=>{
+            el.pause();
+            el.currentTime=0;
+            el.muted=false;
+            el._unlocked=true;
+        }).catch(()=>{el.muted=false});
+    }else{
+        el.muted=false;
+        el._unlocked=true;
+    }
+}
 
 function showInfo(){
+    userStarted=true;
 
-document.getElementById("startScreen").style.display = "none";
+    document.getElementById("startScreen").style.display="none";
+    document.getElementById("mainContent").style.display="block";
 
-document.getElementById("mainContent").style.display = "block";
+    const musicBtn=document.getElementById("musicBtn");
+    const music=document.getElementById("bgMusic");
+    const thunderSfx=document.getElementById("thunderSound");
 
-document.getElementById("bgMusic").play().catch(() => {});
+    musicBtn.style.display="block";
+    music.volume=.4;
+    thunderSfx.volume=.25;
 
-const boxes = document.querySelectorAll('.box');
+    unlockAudio(thunderSfx);
 
-boxes.forEach((box, i)=>{
-setTimeout(()=>{
-box.classList.add('reveal');
-}, i * 400);
-});
+    music.play().then(()=>{
+        musicBtn.innerHTML='<i class="fas fa-volume-high"></i>';
+    }).catch(()=>{
+        musicBtn.innerHTML='<i class="fas fa-volume-xmark"></i>';
+    });
 
+    document.querySelectorAll("#mainContent .box").forEach((box,i)=>{
+        setTimeout(()=>box.classList.add("reveal"),i*250);
+    });
 }
 
-/* RIPPLE EFFECT */
-
-const buttons = document.querySelectorAll('.btn');
-
-buttons.forEach(btn => {
-
-btn.addEventListener('click', function(e){
-
-let ripple = document.createElement('span');
-
-ripple.classList.add('ripple');
-
-let rect = btn.getBoundingClientRect();
-
-let size = Math.max(rect.width, rect.height);
-
-ripple.style.width = ripple.style.height = size + 'px';
-
-ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
-
-ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
-
-btn.appendChild(ripple);
-
-setTimeout(()=> ripple.remove(), 600);
-
-});
-
-});
-
-/* MATRIX EFFECT */
-
-const canvas = document.getElementById("matrix");
-
-const ctx = canvas.getContext("2d");
-
-canvas.height = window.innerHeight;
-
-canvas.width = window.innerWidth;
-
-let letters = "01".split("");
-
-let fontSize = 14;
-
-let columns = canvas.width / fontSize;
-
-let drops = Array(Math.floor(columns)).fill(1);
-
-function draw(){
-
-ctx.fillStyle="rgba(0,0,0,0.05)";
-
-ctx.fillRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle="#ff00cc";
-
-ctx.font=fontSize+"px monospace";
-
-for(let i=0;i<drops.length;i++){
-
-let text=letters[Math.floor(Math.random()*letters.length)];
-
-ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-
-if(drops[i]*fontSize>canvas.height && Math.random()>0.975){
-drops[i]=0;
+function toggleMusic(){
+    const music=document.getElementById("bgMusic");
+    const btn=document.getElementById("musicBtn");
+    if(music.paused){
+        music.play().catch(()=>{});
+        btn.innerHTML='<i class="fas fa-volume-high"></i>';
+    }else{
+        music.pause();
+        btn.innerHTML='<i class="fas fa-volume-xmark"></i>';
+    }
 }
 
-drops[i]++;
-
+/* LOGO FALLBACK (image লোড না হলে "AB" দেখাবে) */
+function logoFallback(img){
+    const fb=document.createElement("div");
+    fb.className="logo logo-fallback";
+    fb.textContent="AB";
+    img.replaceWith(fb);
 }
 
-}
-
-setInterval(draw,33);
-
-/* RESIZE HANDLER */
-
-window.addEventListener('resize', () => {
-
-canvas.width = window.innerWidth;
-
-canvas.height = window.innerHeight;
-
-columns = canvas.width / fontSize;
-
-drops = Array(Math.floor(columns)).fill(1);
-
+/* ================= RIPPLE ================= */
+document.querySelectorAll(".btn").forEach(btn=>{
+    btn.addEventListener("click",function(e){
+        const ripple=document.createElement("span");
+        ripple.className="ripple";
+        const rect=btn.getBoundingClientRect();
+        const size=Math.max(rect.width,rect.height);
+        ripple.style.width=ripple.style.height=size+"px";
+        ripple.style.left=(e.clientX-rect.left-size/2)+"px";
+        ripple.style.top=(e.clientY-rect.top-size/2)+"px";
+        btn.appendChild(ripple);
+        setTimeout(()=>ripple.remove(),600);
+    });
 });
 
+/* ================= STORM BACKGROUND ================= */
+const canvas=document.getElementById("matrix");
+const ctx=canvas.getContext("2d");
+const flash=document.getElementById("lightningFlash");
+const thunderAudio=document.getElementById("thunderSound");
+const reduceMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let width=0,height=0,dpr=1;
+const rainDrops=[];
+const wordDrops=[];
+const lightningBolts=[];
+
+const wordColors=[
+    "#ff00cc","#00ffff","#7a5cff","#00ff88",
+    "#ffe600","#ff7b00","#ff4d6d","#ffffff"
+];
+
+function makeRain(){
+    return{
+        x:Math.random()*width,
+        y:Math.random()*height,
+        length:8+Math.random()*20,
+        speed:5+Math.random()*9,
+        alpha:.10+Math.random()*.45,
+        width:.5+Math.random()*1.1
+    };
+}
+function makeWordDrop(initial=true){
+    return{
+        x:Math.random()*width,
+        y:initial?Math.random()*height:-Math.random()*height-80,
+        speed:.65+Math.random()*2.4,
+        size:12+Math.random()*8,
+        color:wordColors[Math.floor(Math.random()*wordColors.length)],
+        alpha:.20+Math.random()*.58,
+        angle:(Math.random()-.5)*.10,
+        blur:8+Math.random()*18
+    };
+}
+function resizeCanvas(){
+    width=window.innerWidth;
+    height=window.innerHeight;
+    dpr=Math.min(window.devicePixelRatio||1,2);
+
+    canvas.width=Math.floor(width*dpr);
+    canvas.height=Math.floor(height*dpr);
+    canvas.style.width=width+"px";
+    canvas.style.height=height+"px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+
+    rainDrops.length=0;
+    wordDrops.length=0;
+
+    const rainCount=Math.min(250,Math.max(90,Math.floor(width*.27)));
+    const wordCount=Math.min(52,Math.max(18,Math.floor(width/23)));
+
+    for(let i=0;i<rainCount;i++)rainDrops.push(makeRain());
+    for(let i=0;i<wordCount;i++)wordDrops.push(makeWordDrop(true));
+}
+window.addEventListener("resize",resizeCanvas);
+resizeCanvas();
+
+function drawRain(){
+    for(const r of rainDrops){
+        ctx.beginPath();
+        ctx.moveTo(r.x,r.y);
+        ctx.lineTo(r.x-1,r.y+r.length);
+        ctx.strokeStyle=`rgba(145,210,255,${r.alpha})`;
+        ctx.lineWidth=r.width;
+        ctx.stroke();
+        r.y+=r.speed;
+
+        if(r.y>height+30){
+            r.y=-30;
+            r.x=Math.random()*width;
+        }
+    }
+}
+function drawABRain(){
+    for(const d of wordDrops){
+        ctx.save();
+        ctx.translate(d.x,d.y);
+        ctx.rotate(d.angle);
+        ctx.font=`900 ${d.size}px Arial,sans-serif`;
+        ctx.textAlign="center";
+        ctx.textBaseline="middle";
+        ctx.globalAlpha=d.alpha;
+        ctx.fillStyle=d.color;
+        ctx.shadowColor=d.color;
+        ctx.shadowBlur=d.blur;
+        ctx.fillText("AB ORGANIZATION",0,0);
+        ctx.shadowBlur=2;
+        ctx.globalAlpha=Math.min(1,d.alpha+.12);
+        ctx.fillText("AB ORGANIZATION",0,0);
+        ctx.restore();
+
+        d.y+=d.speed;
+        d.x+=Math.sin(d.y*.004)*.12;
+
+        if(d.y>height+80)Object.assign(d,makeWordDrop(false));
+    }
+}
+
+/* Lightning = short-lived canvas objects (fade out) */
+function createLightning(){
+    const startX=Math.random()*width;
+    let x=startX,y=-10;
+    const points=[[x,y]];
+    const segments=7+Math.floor(Math.random()*7);
+
+    for(let i=0;i<segments;i++){
+        y+=height/(segments+.2);
+        x+=(Math.random()-.5)*150;
+        points.push([x,y]);
+    }
+    lightningBolts.push({
+        points,
+        life:1,
+        width:1.5+Math.random()*2.5
+    });
+
+    flash.classList.remove("flash");
+    void flash.offsetWidth;
+    flash.classList.add("flash");
+
+    /* শুধু user interact করার পরে sound বাজবে */
+    if(userStarted){
+        thunderAudio.currentTime=0;
+        thunderAudio.play().catch(()=>{});
+    }
+}
+function drawLightning(){
+    for(let i=lightningBolts.length-1;i>=0;i--){
+        const b=lightningBolts[i];
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(b.points[0][0],b.points[0][1]);
+
+        for(const p of b.points.slice(1))ctx.lineTo(p[0],p[1]);
+
+        ctx.strokeStyle=`rgba(225,245,255,${b.life})`;
+        ctx.lineWidth=b.width;
+        ctx.shadowColor="#bdefff";
+        ctx.shadowBlur=25;
+        ctx.stroke();
+
+        ctx.strokeStyle=`rgba(255,255,255,${b.life})`;
+        ctx.lineWidth=.7;
+        ctx.shadowBlur=7;
+        ctx.stroke();
+        ctx.restore();
+
+        b.life-=.035;
+        if(b.life<=0)lightningBolts.splice(i,1);
+    }
+}
+
+function thunder(){
+    createLightning();
+
+    if(Math.random()>.60){
+        setTimeout(createLightning,100+Math.random()*220);
+    }
+    setTimeout(thunder,4800+Math.random()*8500);
+}
+
+function animateBackground(){
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.fillStyle="rgba(1,2,8,.22)";
+    ctx.fillRect(0,0,width,height);
+
+    drawRain();
+    drawABRain();
+    drawLightning();
+
+    ctx.globalAlpha=1;
+    ctx.shadowBlur=0;
+    requestAnimationFrame(animateBackground);
+}
+
+/* Reduced-motion হলে static frame, নাহলে স্টর্ম চালু */
+if(reduceMotion){
+    drawRain();
+    drawABRain();
+}else{
+    animateBackground();
+    setTimeout(thunder,3000+Math.random()*5000);
+}
 </script>
-
 </body>
 </html>
